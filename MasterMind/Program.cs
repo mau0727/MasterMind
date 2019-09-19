@@ -5,11 +5,15 @@ namespace MasterMind
 {
     class Program
     {
+        #region Privates
         private int CorrectNumbers;
         private int MidCorrectNumbers;
         private int Lives;
         private string UserInput;
         private bool DidUserWin;
+        #endregion
+
+        #region Constructor
         public Program()
         {
             CorrectNumbers = 0;
@@ -18,25 +22,26 @@ namespace MasterMind
             UserInput = string.Empty;
             DidUserWin = false;
         }
+        #endregion
 
         static void Main(string[] args)
         {
             Program program = new Program();
             program.RunProgram();
-
         }
 
+        #region Methods
         public void RunProgram()
         {
             Console.WriteLine("Press a Key To Generate the four numbers Master Code");
-            Console.ReadKey();Console.WriteLine();
+            Console.ReadKey(); Console.WriteLine();
             var listOfNumbers = GenerateNumbers();
-            while(Lives > 0)
+            while (Lives > 0)
             {
                 bool isInputValid = false;
                 while (!isInputValid)
                 {
-                    Console.WriteLine("Enter The four Digit you think were generated you Have {0} lives",Lives);
+                    Console.WriteLine("Enter The four Digit you think were generated you Have {0} lives", Lives);
                     UserInput = Console.ReadLine();
                     isInputValid = ValidateInput(UserInput);
                 }
@@ -46,10 +51,8 @@ namespace MasterMind
                 DidUserWin = CheckResults();
                 Console.WriteLine();
             }
-
-            string result  = DidUserWin ?"You Won!":"You Lost!";
+            string result = DidUserWin ? "You Won!" : "You Lost!";
             Console.WriteLine(result);
-
         }
 
         private bool ValidateInput(string code)
@@ -60,7 +63,6 @@ namespace MasterMind
 
             Console.WriteLine("Incorrect Input -> The Input can only be numeric and it has to be exactly 4 digits");
             return false;
-
         }
 
         private List<string> GenerateNumbers()
@@ -77,7 +79,6 @@ namespace MasterMind
 
         private void CalculateResults(List<string> numberCodes, string CodeEnteredByUser)
         {
-
             for (int i = 0; i < numberCodes.Count; i++)
             {
                 var t = CodeEnteredByUser[i].ToString();
@@ -96,7 +97,7 @@ namespace MasterMind
         private void PrintResults(int amountOfTimes, bool correct = true)
         {
             string stringToPrint = correct ? "+ " : "- ";
-            for(int x = amountOfTimes; x > 0; x -- )
+            for (int x = amountOfTimes; x > 0; x--)
             {
                 Console.Write(stringToPrint);
             }
@@ -116,8 +117,6 @@ namespace MasterMind
             UserInput = string.Empty;
             return false;
         }
-
-
-        
+        #endregion 
     }
 }
